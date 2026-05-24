@@ -1,0 +1,140 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+
+# Database
+*.db
+fraud_detection.db
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.exe
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Model Files (pre-trained models - optional, can be generated)
+models/*.pkl
+models/xgb_model.pkl
+models/rf_model.pkl
+models/phishing_model.pkl
+models/user_anomaly_models.pkl
+models/label_encoders.pkl
+
+# Data Files (original datasets - optional, can be large)
+*.csv
+UPI_Dataset.csv
+phishing.csv
+synthetic_fraud_data_*.csv
+user_profiles.csv
+
+# Flask
+instance/
+.webassets-cache
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.tox/
+.coverage
+.coverage.*
+
+# IDEs - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Node modules (if using any Node tools)
+node_modules/
+npm-debug.log
+
+# Yarn
+yarn-error.log
+
+# Mac
+.AppleDouble
+.LSOverride
+._*
+
+# System
+.DS_Store
+.AppleDouble
+.LSOverride
+*.DS_Store
+Thumbs.db
+
+# Project specific
+/static/uploads/
+/temp/
+/cache/
+.flaskenv
+instance/

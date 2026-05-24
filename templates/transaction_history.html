@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}History - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Transaction History</h1>
+</div>
+
+<div class="card">
+    <div class="card-body" style="padding: 0;">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Receiver UPI ID</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if transactions %}
+                    {% for txn in transactions %}
+                    <tr>
+                        <td style="color: var(--text-light); font-size: 0.9rem;">{{ txn[0] }}</td>
+                        <td>{{ txn[2] }}</td>
+                        <td style="font-weight: 500;">₹{{ txn[3] }}</td>
+                        <td>{{ txn[4] }}</td>
+                        <td>
+                            {% if txn[6] == 1 %}
+                            <span style="color: var(--error-color); font-weight: 600;">Fraudulent</span>
+                            {% else %}
+                            <span style="color: var(--accent-color); font-weight: 600;">Legitimate</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            No transactions found.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

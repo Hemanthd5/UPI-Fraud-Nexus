@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>My Profile</h1>
+</div>
+
+<div class="profile-wrapper" style="display: flex; gap: 30px; flex-wrap: wrap;">
+
+    <!-- Left Column: Profile Card -->
+    <div class="card" style="flex: 1; min-width: 300px; text-align: center; padding: 40px 20px;">
+        <div class="profile-avatar" style="
+            width: 100px; height: 100px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem; color: var(--primary-color);">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <h2 style="margin-bottom: 5px; color: var(--text-primary);">{{ user_data['name'] }}</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 25px;">{{ user_data['phone_number'] }}</p>
+
+        <div style="display: flex; justify-content: center; gap: 10px;">
+            <button class="btn btn-secondary"><i class="fas fa-pen"></i> Edit</button>
+            <a href="{{ url_for('logout') }}" class="btn" style="background-color: #fee2e2; color: #dc2626;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Right Column: Details & Security -->
+    <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- Account Details Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Account Details</h3>
+                <p>Your personal and banking information</p>
+            </div>
+            <div class="card-body">
+                <div class="detail-row" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                    <span style="color: var(--text-secondary); font-weight: 500;">UPI ID</span>
+                    <span style="font-weight: 600; color: var(--text-primary);">{{ user_data['phone_number'] }}@{{ user_data['bank_name'] }}</span>
+                </div>
+                <div class="detail-row" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                    <span style="color: var(--text-secondary); font-weight: 500;">Linked Bank</span>
+                    <span style="font-weight: 600; color: var(--text-primary); text-transform: uppercase;">{{ user_data['bank_name'] }}</span>
+                </div>
+                <div class="detail-row" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border-color);">
+                    <span style="color: var(--text-secondary); font-weight: 500;">Registered Device</span>
+                    <span style="font-weight: 600; color: var(--text-primary);">{{ user_data['device_os'] }}</span>
+                </div>
+                <div class="detail-row" style="display: flex; justify-content: space-between; padding: 15px 0;">
+                    <span style="color: var(--text-secondary); font-weight: 500;">Last Active</span>
+                    <span style="font-weight: 600; color: var(--text-primary);">{{ user_data['last_active'] }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Security Settings</h3>
+                <p>Manage your account security</p>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 600;">Two-Factor Authentication</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Add an extra layer of security via SMS.</p>
+                    </div>
+                    <!-- Toggle Switch Simulation -->
+                    <div style="width: 40px; height: 20px; background: var(--accent-color); border-radius: 20px; position: relative;">
+                        <div style="width: 16px; height: 16px; background: white; border-radius: 50%; position: absolute; right: 2px; top: 2px;"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 600;">Change Password</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Update your login password regularly.</p>
+                    </div>
+                    <button class="btn btn-secondary" style="padding: 5px 15px; font-size: 0.85rem;">Update</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

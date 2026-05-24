@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Payment Options - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Pay Securely</h1>
+</div>
+
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <div class="card-body">
+        <div class="payment-summary">
+            <div class="amount">₹{{ amount }}</div>
+            <div class="recipient">Paying to <span>{{ receiver_id }}</span></div>
+        </div>
+
+        <h3 class="section-title" style="text-align: center; font-weight: 500; margin-top: 20px;">Choose a Payment Method</h3>
+        <div class="bank-list">
+            <a href="{{ url_for('details', sender_id=sender_id, receiver_id=receiver_id, amount=amount, option='GooglePay', sender_name=sender_name) }}" class="bank-item">
+                <div class="bank-icon"><i class="fab fa-google-pay"></i></div>
+                <div class="bank-name">Google Pay</div>
+                <div class="radio-icon"><i class="fas fa-chevron-right"></i></div>
+            </a>
+            <a href="{{ url_for('details', sender_id=sender_id, receiver_id=receiver_id, amount=amount, option='PhonePe', sender_name=sender_name) }}" class="bank-item">
+                <div class="bank-icon" style="color: #673ab7;"><i class="fas fa-mobile-alt"></i></div>
+                <div class="bank-name">PhonePe</div>
+                <div class="radio-icon"><i class="fas fa-chevron-right"></i></div>
+            </a>
+            <a href="{{ url_for('details', sender_id=sender_id, receiver_id=receiver_id, amount=amount, option='Paytm', sender_name=sender_name) }}" class="bank-item">
+                <div class="bank-icon" style="color: #00baf2;"><i class="fas fa-wallet"></i></div>
+                <div class="bank-name">Paytm</div>
+                <div class="radio-icon"><i class="fas fa-chevron-right"></i></div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

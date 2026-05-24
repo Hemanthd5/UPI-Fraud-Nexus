@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if result %}
+        Transaction Alert - PaySecure
+    {% else %}
+        Send Money - PaySecure
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="page-header">
+    <h1>
+        {% if result %}
+            Transaction Alert
+        {% else %}
+            Send Money
+        {% endif %}
+    </h1>
+</div>
+
+{% if result %}
+    <div class="result-container" style="padding-top: 0;">
+        <div class="result-icon {% if 'Fraudulent' in result %}fail{% else %}success{% endif %}">
+            <i class="fas {% if 'Fraudulent' in result %}fa-shield-alt{% else %}fa-check-circle{% endif %}"></i>
+        </div>
+        <h2 class="result-title">{{ result.split()[0] }} Detected</h2>
+        <p class="result-message">{{ explanation }}</p>
+        
+        <div class="result-details-box">
+            <p><span class="label">Status</span> <span style="font-weight: 700; color: var(--error-color);">HIGH RISK</span></p>
+            <p><span class="label">Risk Score</span> <span style="font-weight: 700; color: var(--error-color);">{{ risk_score }}%</span></p>
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;">
+            <p><span class="label">Amount</span> <span>₹{{ amount }}</span></p>
+            <p><span class="label">To</span> <span>{{ receiver_id }}</span></p>
+        </div>
+        
+        <a href="{{ url_for('transaction', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-primary">Make Another Transaction</a>
+    </div>
+
+{% else %}
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ url_for('predict') }}" method="post" style="max-width: 600px; margin: 0 auto;">
+                <input type="hidden" name="sender_upi_id" value="{{ sender_id }}">
+                
+                <div class="form-group">
+                    <label for="receiver_upi_id">Receiver's UPI ID</label>
+                    <input type="text" id="receiver_upi_id" name="receiver_upi_id" class="form-control" placeholder="recipient@bank" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Amount (₹)</label>
+                    <input type="text" id="amount" name="amount" class="form-control" placeholder="0.00" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transaction_type">Transaction Type</label>
+                    <select id="transaction_type" name="transaction_type" class="form-control" required>
+                        <option value="Unknown">Select Type</option>
+                        <option value="Merchant Payment">Merchant Payment</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Bill Payment">Bill Payment</option>
+                        <option value="POS Payment">POS Payment</option>
+                        <option value="Refund">Refund</option>
+                        <option value="ATM Withdrawal">E-Commerce</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transaction_city">Transaction City</label>
+                    <input type="text" id="transaction_city" name="transaction_city" class="form-control" placeholder="e.g., Mumbai, Delhi" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Review Transaction</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

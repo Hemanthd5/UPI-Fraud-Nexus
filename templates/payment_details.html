@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Confirm Payment - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Confirm Payment</h1>
+</div>
+
+<div style="max-width: 500px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-body" style="text-align: center;">
+
+            <div class="payment-summary" style="border-bottom: none; padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
+                <div class="amount" style="font-size: 3rem;">₹{{ amount }}</div>
+            </div>
+
+            <h3 style="font-weight: 500; font-size: 1.1rem; margin-top: 10px;">Paying to</h3>
+            <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary);">{{ receiver_id.split('@')[0] | capitalize }}</p>
+            <p style="color: var(--text-secondary); margin-bottom: 25px;">{{ receiver_id }}</p>
+
+            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 20px 0;">
+
+            <div style="text-align: left; margin-bottom: 20px;">
+                <h4 style="color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; margin-bottom: 10px;">FROM</h4>
+                <div class="bank-item" style="cursor: default; border-color: var(--primary-color);">
+                    <div class="bank-icon">
+                        {% if option == 'GooglePay' %}
+                            <i class="fab fa-google-pay"></i>
+                        {% elif option == 'PhonePe' %}
+                            <i class="fas fa-mobile-alt" style="color: #673ab7;"></i>
+                        {% else %}
+                            <i class="fas fa-wallet" style="color: #00baf2;"></i>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--bg-light); border-radius: 8px; margin-bottom: 25px;">
+                <span style="font-weight: 600; font-size: 1.1rem;">Total:</span>
+                <span style="font-weight: 700; font-size: 1.2rem; color: var(--primary-color);">₹{{ amount }}</span>
+            </div>
+
+            <a href="{{ url_for('complete', sender_id=sender_id, sender_name=sender_name, receiver_id=receiver_id, amount=amount) }}" class="btn btn-success btn-block">
+                <i class="fas fa-lock"></i> Pay Securely
+            </a>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

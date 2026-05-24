@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Payment Successful - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <div class="result-icon success"><i class="fas fa-check-circle"></i></div>
+    <h2 class="result-title">Payment Successful</h2>
+    
+    <div class="result-amount">₹{{ amount }}</div>
+    
+    <p class="result-message">Your transaction to <strong>{{ receiver_id }}</strong> was completed successfully.</p>
+    
+    <div style="display: flex; gap: 15px;">
+        <a href="{{ url_for('dashboard', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-primary">
+            Return to Dashboard
+        </a>
+        <a href="{{ url_for('transaction', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-secondary">
+            Make New Transaction
+        </a>
+    </div>
+</div>
+{% endblock %}

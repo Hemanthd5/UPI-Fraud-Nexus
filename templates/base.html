@@ -1,0 +1,106 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PaySecure{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .sidebar-nav img.icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px; /* Adjust as needed */
+            vertical-align: middle;
+            filter: invert(0.7); /* Makes icon light-colored like the others */
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="logo">UPI Fraud Nexus</div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{{ url_for('dashboard', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-home icon"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('transaction', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-paper-plane icon"></i> Send Money</a></li>
+                    <li><a href="{{ url_for('history', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-receipt icon"></i> History</a></li>
+                    <li><a href="{{ url_for('phishing_detector', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-shield-alt icon"></i> URL Detector</a></li>
+                    <li><a href="{{ url_for('profile', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-user icon"></i> Profile</a></li>
+                </ul>
+                <ul class="logout">
+                     <li>
+                        <a href="{{ url_for('index') }}">
+                            <img src="{{ url_for('static', filename='images/icon.jpeg') }}" class="icon" alt="Logout"> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+
+        </main>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Fraud Nexus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .sidebar-nav img.icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            vertical-align: middle;
+            filter: invert(0.7);
+        }
+    </style>
+</head>
+
+{# 1. Define logic: Hide sidebar on Login, Register, and Index pages #}
+{% set hide_sidebar = request.endpoint in ['login', 'register', 'index'] %}
+
+{# 2. Add 'auth-body' class to <body> if sidebar is hidden (this triggers the centered gradient background from style.css) #}
+<body class="{{ 'auth-body' if hide_sidebar else '' }}">
+
+    {# 3. Use 'app-layout' (sidebar mode) OR 'auth-wrapper' (full width mode) #}
+    <div class="{{ 'app-layout' if not hide_sidebar else 'auth-wrapper' }}" style="{{ 'width: 100%' if hide_sidebar else '' }}">
+
+        {# 4. ONLY render the Sidebar if 'hide_sidebar' is False #}
+        {% if not hide_sidebar %}
+        <aside class="sidebar">
+            <div class="logo">UPI Fraud Nexus</div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="{{ url_for('dashboard', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-home icon"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('transaction', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-paper-plane icon"></i> Send Money</a></li>
+                    <li><a href="{{ url_for('history', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-receipt icon"></i> History</a></li>
+                    <li><a href="{{ url_for('phishing_detector', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-shield-alt icon"></i> URL Detector</a></li>
+                    <li><a href="{{ url_for('profile', sender_id=sender_id, sender_name=sender_name) }}"><i class="fas fa-user icon"></i> Profile</a></li>
+                </ul>
+                <ul class="logout">
+                     <li>
+                        <a href="{{ url_for('index') }}">
+                            <img src="{{ url_for('static', filename='images/icon.jpeg') }}" class="icon" alt="Logout"> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        {% endif %}
+
+        {# 5. Adjust the main content area class so it doesn't have a left margin when sidebar is gone #}
+        <main class="{{ 'content-area' if not hide_sidebar else 'auth-content' }}">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

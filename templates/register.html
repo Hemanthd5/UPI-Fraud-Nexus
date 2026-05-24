@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Register - UPI Nexus{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Create Account</h2>
+    <p>Join the secure payment network</p>
+
+    {% if error %}
+        <div class="flash-message error">{{ error }}</div>
+    {% endif %}
+
+    <form action="{{ url_for('register') }}" method="POST">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="sender_name" placeholder="e.g. Full Name" required>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone_number" placeholder="+91 98765 43210" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create a strong password" required>
+        </div>
+        <div class="form-group">
+            <label>Linked Bank</label>
+            <select name="bank_name" required>
+                <option value="" disabled selected>Select Bank</option>
+                <option value="sbi">State Bank of India</option>
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="axis">Axis Bank</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Device OS</label>
+            <select name="device_os" required>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary">Create Account</button>
+    </form>
+
+    <div class="form-footer">
+        Already have an account? <a href="{{ url_for('login') }}">Sign In</a>
+    </div>
+</div>
+{% endblock %}

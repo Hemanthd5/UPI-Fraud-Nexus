@@ -1,0 +1,214 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This website is develop for identify the safety of url.">
+    <meta name="keywords" content="phishing url,phishing,cyber security,machine learning,classifier,python">
+    <meta name="author" content="VAIBHAV BICHAVE">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
+    <link href="static/styles.css" rel="stylesheet">
+    <title>URL detection</title>
+    
+</head>
+
+<body>
+    
+<div class=" container">
+    <div class="row">
+        <div class="form col-md" id="form1">
+            <h2>PHISHING URL DETECTION</h2>
+    
+            <br>
+            <form action="/" method ="post">
+                <input type="text" class="form__input" name ='url' id="url" placeholder="Enter URL" required="" />
+                <label for="url" class="form__label">URL</label>
+                <button class="button" role="button" >Check here</button>
+            </form>
+           
+    </div>
+    
+    <div class="col-md" id="form2">
+        
+        <br>
+        <h6 class = "right "><a href= {{ url }} target="_blank">{{ url }}</a></h6>
+           
+        <br>
+        <h3 id="prediction"></h3>
+        <button class="button2" id="button2" role="button" onclick="window.open('{{url}}')" target="_blank" >Still want to Continue</button>
+        <button class="button1" id="button1" role="button"  onclick="window.open('{{url}}')" target="_blank">Continue</button>
+    </div> 
+</div>
+<br>
+<p>©2021 VAIBHAV BICHAVE</p>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    
+    <script>
+        
+            let x = '{{xx}}';
+            let num = x*100;
+            if (0<=x && x<0.50){
+                num = 100-num;
+            }
+            let txtx = num.toString();
+            if(x<=1 && x>=0.50){
+                var label = "Website is "+txtx +"% safe to use...";
+                document.getElementById("prediction").innerHTML = label;
+                document.getElementById("button1").style.display="block";
+            }
+            else if (0<=x && x<0.50){
+                var label = "Website is "+txtx +"% unsafe to use..."
+                document.getElementById("prediction").innerHTML = label ;
+                document.getElementById("button2").style.display="block";
+            }
+        
+    </script>
+    
+</body>
+
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern-looking, secure phishing URL detector.">
+    <meta name="keywords" content="phishing url,phishing,cyber security,machine learning,classifier,python">
+    <meta name="author" content="VAIBHAV BICHAVE (Design by Gemini)">
+
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Page Title --><title>Phishing URL Detector</title>
+
+    <!-- Inline Styles for Custom Font and Gradient --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-gradient {
+            background-image: linear-gradient(to right, #3b82f6, #6366f1);
+        }
+        .btn-gradient:hover {
+            background-image: linear-gradient(to right, #2563eb, #4f46e5);
+        }
+    </style>
+</head>
+
+<!-- Full-height blue gradient background --><body class="bg-gradient-to-br from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Content Card --><div class="glass-card w-full max-w-lg p-6 sm:p-10 rounded-2xl shadow-2xl">
+
+        <!-- Header Section --><div class="text-center mb-8">
+            <!-- Shield Icon REMOVED --><h1 class="text-3xl font-bold text-gray-900">Phishing URL Detector</h1>
+            <p class="text-gray-600 mt-2">Enter a URL to check its safety.</p>
+        </div>
+
+        <!-- URL Input Form --><form action="/" method="post" class="space-y-6">
+            <div>
+                <label for="url" class="block text-sm font-medium text-gray-700 sr-only">Enter URL</label>
+                <input type="text" class="w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500" name="url" id="url" placeholder="Enter URL (e.g., https://google.com)" required="" />
+            </div>
+
+            <button class="btn-gradient w-full text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105" role="button">
+                Check URL
+            </button>
+        </form>
+
+        <!-- Spacer --><hr class="my-8 border-t border-gray-200">
+
+        <!-- Result Section (Hidden by default) --><div id="result-container" class="hidden text-center">
+
+            <!-- Analyzed URL --><h3 class="text-lg font-medium text-gray-800 break-words">Analyzed URL:</h3>
+            <a href="{{ url }}" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm break-words">{{ url }}</a>
+
+            <!-- Safe Result Card --><div id="safe-result" class="hidden mt-6 p-5 rounded-lg bg-green-50 border border-green-200">
+                <svg class="w-12 h-12 mx-auto text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 id="safe-prediction" class="text-2xl font-bold text-green-700 mt-2">Website is 95% Safe</h2>
+                <p class="text-green-600">This URL appears to be safe to use.</p>
+                <button class="mt-4 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300" role="button" onclick="window.open('{{url}}')" target="_blank">
+                    Continue to Site
+                </button>
+            </div>
+
+            <!-- Unsafe Result Card --><div id="unsafe-result" class="hidden mt-6 p-5 rounded-lg bg-red-50 border border-red-200">
+                <svg class="w-12 h-12 mx-auto text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <h2 id="unsafe-prediction" class="text-2xl font-bold text-red-700 mt-2">Website is 95% Unsafe</h2>
+                <p class="text-red-600">This URL is potentially malicious. Proceed with caution.</p>
+                <button class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-lg transition-colors duration-300" role="button" onclick="window.open('{{url}}')" target="_blank">
+                    Still want to Continue (Not Recommended)
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Footer --><p class="text-center text-xs text-gray-500 mt-8">@UPI Fraud Nexus</p>
+    </div>
+
+    <!-- JavaScript to Handle Results --><script>
+        // Get the probability score from Flask
+        let probabilityString = '{{ xx }}';
+        let score = parseFloat(probabilityString);
+
+        // Check if the score is a valid number (i.e., if Flask passed it)
+        if (!isNaN(score) && score >= 0 && score <= 1) {
+
+            // Calculate percentages
+            let safeProbability = score; // This is y_pro_non_phishing
+            let unsafeProbability = 1.0 - safeProbability;
+
+            // The original logic was a bit confusing.
+            // y_pro_non_phishing = gbc.predict_proba(x)[0,1]
+            // If y_pro_non_phishing (xx) is high (e.g., 0.9), it's 90% "non-phishing" (safe).
+            // If y_pro_non_phishing (xx) is low (e.g., 0.1), it's 10% "non-phishing", so 90% "phishing" (unsafe).
+            // We'll set a 50% threshold.
+
+            if (safeProbability >= 0.50) {
+                // It's safe
+                let safePercent = (safeProbability * 100).toFixed(0);
+                document.getElementById('safe-prediction').innerHTML = "Website is " + safePercent + "% Safe";
+                document.getElementById('safe-result').classList.remove('hidden');
+            } else {
+                // It's unsafe
+                let unsafePercent = (unsafeProbability * 100).toFixed(0);
+                document.getElementById('unsafe-prediction').innerHTML = "Website is " + unsafePercent + "% Unsafe";
+                document.getElementById('unsafe-result').classList.remove('hidden');
+            }
+
+            // Show the whole result container
+            document.getElementById('result-container').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Fraud Nexus - AI-Powered UPI Fraud Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="landing-layout">
+        <header class="landing-header">
+            <div class="landing-container">
+                <div class="logo">UPI Fraud Nexus </div>
+                <nav class="landing-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-buttons">
+                    <a href="{{ url_for('login') }}" class="btn btn-signin">Sign In</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-purple">
+                        Sign Up <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="hero-section">
+            <div class="landing-container hero-content">
+                <div class="hero-text">
+                    <h1> Secure Your UPI Transactions</h1>
+                    <p>
+                        Our advanced AI-powered UPI fraud detection project provides real-time
+                        analysis and alerts to keep your digital payments safe and secure.
+                    </p>
+                    <a href="{{ url_for('register') }}" class="btn btn-purple btn-large">
+                        Get Started <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                </div>
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='images/icon.jpeg') }}" alt="UPI Security Illustration">
+                </div>
+            </div>
+        </main>
+
+        <section class="features-section" id="features">
+            <div class="landing-container">
+                <h2 class="section-title">Our Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Real-Time Detection</h3>
+                        <p>Instantly analyze transactions as they happen to stop fraud before it occurs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered Analysis</h3>
+                        <p>Utilizes advanced machine learning models (XGBoost) to detect complex fraud patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Secure Transactions</h3>
+                        <p>Provides a risk score and explanation for every transaction, ensuring peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+</body>
+</html>

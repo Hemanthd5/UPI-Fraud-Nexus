@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - UPI Fraud Nexus{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Welcome back, {{ sender_name }}!</h1>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+
+    <div class="card">
+        <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
+            <i class="fas fa-paper-plane" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 15px;">Send Money</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">Start a new, secure transaction.</p>
+            <a href="{{ url_for('transaction', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-primary" style="width: 100%;">Start Transaction</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
+            <i class="fas fa-receipt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 15px;">View History</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">Review all your past transactions.</p>
+            <a href="{{ url_for('history', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-secondary" style="width: 100%;">View History</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
+            <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 15px;">URL Detector</h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">Check if a website link is safe.</p>
+            <a href="{{ url_for('phishing_detector', sender_id=sender_id, sender_name=sender_name) }}" class="btn btn-secondary" style="width: 100%;">Check a URL</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Recent Activity</h3>
+    </div>
+    <div class="card-body">
+
+        {% if recent_transactions %}
+            <ul class="activity-list">
+                {% for tx in recent_transactions %}
+                    <li class="activity-item">
+                        <div class="activity-icon
+                            {% if tx[1] == sender_id and tx[6] == 1 %} fraud-alert
+                            {% elif tx[1] == sender_id %} sent
+                            {% else %} received {% endif %}">
+
+                            {% if tx[1] == sender_id %}
+                                <i class="fas fa-arrow-up"></i> {% else %}
+                                <i class="fas fa-arrow-down"></i> {% endif %}
+                        </div>
+
+                        <div class="activity-details">
+                            {% if tx[1] == sender_id %}
+                                <strong>Sent to {{ tx[2] }}</strong>
+                            {% else %}
+                                <strong>Received from {{ tx[1] }}</strong>
+                            {% endif %}
+                            <span class="activity-time">{{ tx[4] }}</span> </div>
+
+                        <div class="activity-amount
+                            {% if tx[1] == sender_id %} amount-sent
+                            {% else %} amount-received {% endif %}">
+
+                            {% if tx[1] == sender_id %}
+                                - ₹{{ "%.2f"|format(tx[3]) }}
+                            {% else %}
+                                + ₹{{ "%.2f"|format(tx[3]) }}
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color: var(--text-secondary); text-align: center;">No recent transactions found.</p>
+        {% endif %}
+        </div>
+</div>
+
+<style>
+    .activity-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 1.1rem;
+    }
+    .activity-icon.sent {
+        background-color: #ffebe6;
+        color: #e65c35;
+    }
+    .activity-icon.received {
+        background-color: #e6f7eb;
+        color: #34a853;
+    }
+    .activity-icon.fraud-alert {
+        background-color: #fce8e6;
+        color: #d93025;
+        border: 2px solid #d93025;
+    }
+    .activity-details {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .activity-details strong {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+    .activity-time {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+    .activity-amount {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    .activity-amount.amount-sent {
+        color: var(--text-primary);
+    }
+    .activity-amount.amount-received {
+        color: #34a853;
+    }
+</style>
+{% endblock %}
